@@ -603,232 +603,263 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('marketResearchForm');
-            const thankYouMessage = document.getElementById('thankyou-message');
-            const featureRankingInput = document.getElementById('feature-ranking-input');
-            const featureRanking = document.getElementById('feature-ranking');
-            const featureItems = document.querySelectorAll('.feature-item');
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('marketResearchForm');
+    const thankYouMessage = document.getElementById('thankyou-message');
+    const featureRankingInput = document.getElementById('feature-ranking-input');
+    const featureRanking = document.getElementById('feature-ranking');
+    const featureItems = document.querySelectorAll('.feature-item');
+    const progressFill = document.getElementById('progress-fill');
+    
+    // Initialize feature ranking controls
+    setupFeatureRanking();
+    
+    // Set initial progress
+    progressFill.style.width = '10%';
+    
+    // Initialize form validation and handle submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
+        
+        if (validateForm()) {
+            // Show progress
+            progressFill.style.width = '90%';
             
-            // Initialize feature ranking controls
-            setupFeatureRanking();
+            // Collect form data
+            const formData = new FormData(form);
             
-            // Initialize form validation
-            form.addEventListener('submit', function(e) {
-                if (!validateForm()) {
-                    e.preventDefault(); // Prevent form submission if validation fails
+            // Submit the form using fetch API
+            fetch('https://formsubmit.co/deniswaweru68@gmail.com', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Form submitted successfully
+                    progressFill.style.width = '100%';
+                    form.style.display = 'none';
+                    thankYouMessage.style.display = 'block';
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was a problem submitting your form. Please try again later.');
+                progressFill.style.width = '10%';
+            });
+        }
+    });
+    
+    // Setup feature ranking functionality
+    function setupFeatureRanking() {
+        // Initialize drag and drop for desktop devices
+        setupDragAndDrop();
+        
+        // Initialize touch events for mobile devices
+        setupTouchEvents();
+        
+        // Update the hidden input with the current ranking
+        updateFeatureRankingInput();
+    }
+    
+    // Set up drag and drop for desktop devices
+    function setupDragAndDrop() {
+        let draggedItem = null;
+        
+        featureItems.forEach(item => {
+            // Drag start event
+            item.addEventListener('dragstart', function(e) {
+                draggedItem = this;
+                setTimeout(() => this.classList.add('dragging'), 0);
+                
+                // For Firefox compatibility
+                e.dataTransfer.setData('text/plain', '');
+                e.dataTransfer.effectAllowed = 'move';
+            });
+            
+            // Drag end event
+            item.addEventListener('dragend', function() {
+                this.classList.remove('dragging');
+                draggedItem = null;
+                document.querySelectorAll('.feature-item').forEach(item => {
+                    item.classList.remove('over');
+                });
+            });
+            
+            // Drag over event
+            item.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Drag enter event
+            item.addEventListener('dragenter', function(e) {
+                e.preventDefault();
+                if (this !== draggedItem) {
+                    this.classList.add('over');
                 }
             });
             
-            // Setup feature ranking functionality
-            function setupFeatureRanking() {
-                // Initialize drag and drop for desktop devices
-                setupDragAndDrop();
-                
-                // Initialize touch events for mobile devices
-                setupTouchEvents();
-                
-                // Update the hidden input with the current ranking
-                updateFeatureRankingInput();
-            }
+            // Drag leave event
+            item.addEventListener('dragleave', function() {
+                this.classList.remove('over');
+            });
             
-            // Set up drag and drop for desktop devices
-            function setupDragAndDrop() {
-                let draggedItem = null;
-                
-                featureItems.forEach(item => {
-                    // Drag start event
-                    item.addEventListener('dragstart', function(e) {
-                        draggedItem = this;
-                        setTimeout(() => this.classList.add('dragging'), 0);
-                        
-                        // For Firefox compatibility
-                        e.dataTransfer.setData('text/plain', '');
-                        e.dataTransfer.effectAllowed = 'move';
-                    });
+            // Drop event
+            item.addEventListener('drop', function(e) {
+                e.preventDefault();
+                if (this !== draggedItem) {
+                    const allItems = Array.from(featureRanking.querySelectorAll('.feature-item'));
+                    const draggedIndex = allItems.indexOf(draggedItem);
+                    const targetIndex = allItems.indexOf(this);
                     
-                    // Drag end event
-                    item.addEventListener('dragend', function() {
-                        this.classList.remove('dragging');
-                        draggedItem = null;
-                        document.querySelectorAll('.feature-item').forEach(item => {
-                            item.classList.remove('over');
-                        });
-                    });
+                    if (draggedIndex < targetIndex) {
+                        featureRanking.insertBefore(draggedItem, this.nextElementSibling);
+                    } else {
+                        featureRanking.insertBefore(draggedItem, this);
+                    }
                     
-                    // Drag over event
-                    item.addEventListener('dragover', function(e) {
-                        e.preventDefault();
-                        return false;
-                    });
-                    
-                    // Drag enter event
-                    item.addEventListener('dragenter', function(e) {
-                        e.preventDefault();
-                        if (this !== draggedItem) {
-                            this.classList.add('over');
-                        }
-                    });
-                    
-                    // Drag leave event
-                    item.addEventListener('dragleave', function() {
-                        this.classList.remove('over');
-                    });
-                    
-                    // Drop event
-                    item.addEventListener('drop', function(e) {
-                        e.preventDefault();
-                        if (this !== draggedItem) {
-                            const allItems = Array.from(featureRanking.querySelectorAll('.feature-item'));
-                            const draggedIndex = allItems.indexOf(draggedItem);
-                            const targetIndex = allItems.indexOf(this);
-                            
-                            if (draggedIndex < targetIndex) {
-                                featureRanking.insertBefore(draggedItem, this.nextElementSibling);
-                            } else {
-                                featureRanking.insertBefore(draggedItem, this);
-                            }
-                            
-                            updateFeatureNumbers();
-                        }
-                        return false;
-                    });
-                });
-            }
-            
-            // Set up touch events for mobile devices
-            function setupTouchEvents() {
-                let touchItem = null;
-                let initialY = 0;
-                let currentY = 0;
-                
-                featureItems.forEach(item => {
-                    // Touch start event
-                    item.addEventListener('touchstart', function(e) {
-                        touchItem = this;
-                        initialY = e.touches[0].clientY;
-                        this.classList.add('dragging');
-                        
-                        // Prevent scrolling while dragging
-                        e.preventDefault();
-                    }, { passive: false });
-                    
-                    // Touch move event
-                    item.addEventListener('touchmove', function(e) {
-                        if (touchItem) {
-                            currentY = e.touches[0].clientY;
-                            const deltaY = currentY - initialY;
-                            
-                            // Move the element with the touch
-                            const items = Array.from(featureRanking.querySelectorAll('.feature-item'));
-                            const touchIndex = items.indexOf(touchItem);
-                            const itemHeight = touchItem.offsetHeight;
-                            
-                            // Determine if we should move up or down based on direction and distance
-                            if (deltaY < -itemHeight/2 && touchIndex > 0) {
-                                // Move up
-                                featureRanking.insertBefore(touchItem, items[touchIndex - 1]);
-                                initialY = currentY;
-                                updateFeatureNumbers();
-                            } else if (deltaY > itemHeight/2 && touchIndex < items.length - 1) {
-                                // Move down
-                                featureRanking.insertBefore(items[touchIndex + 1], touchItem);
-                                initialY = currentY;
-                                updateFeatureNumbers();
-                            }
-                            
-                            // Prevent scrolling while dragging
-                            e.preventDefault();
-                        }
-                    }, { passive: false });
-                    
-                    // Touch end event
-                    item.addEventListener('touchend', function() {
-                        if (touchItem) {
-                            touchItem.classList.remove('dragging');
-                            touchItem = null;
-                        }
-                    });
-                    
-                    // Touch cancel event
-                    item.addEventListener('touchcancel', function() {
-                        if (touchItem) {
-                            touchItem.classList.remove('dragging');
-                            touchItem = null;
-                        }
-                    });
-                });
-            }
-            
-            // Update feature numbers after reordering
-            function updateFeatureNumbers() {
-                const items = document.querySelectorAll('.feature-item');
-                items.forEach((item, index) => {
-                    const numberSpan = item.querySelector('.feature-number');
-                    numberSpan.textContent = index + 1;
-                });
-                
-                // Update the hidden input with the current ranking
-                updateFeatureRankingInput();
-            }
-            
-            // Update the hidden input with the current ranking
-            function updateFeatureRankingInput() {
-                const featureRanking = [];
-                document.querySelectorAll('.feature-item').forEach(item => {
-                    featureRanking.push(item.getAttribute('data-feature'));
-                });
-                featureRankingInput.value = JSON.stringify(featureRanking);
-            }
-            
-            // Form validation function
-            function validateForm() {
-                let isValid = true;
-                
-                // Reset all error messages
-                document.querySelectorAll('.error-message').forEach(msg => {
-                    msg.style.display = 'none';
-                });
-                
-                // Validate name
-                const name = document.getElementById('name');
-                if (!name.value.trim()) {
-                    document.getElementById('name-error').style.display = 'block';
-                    isValid = false;
+                    updateFeatureNumbers();
                 }
-                
-                // Validate email
-                const email = document.getElementById('email');
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email.value)) {
-                    document.getElementById('email-error').style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate age group
-                const ageGroup = document.getElementById('age-group');
-                if (!ageGroup.value) {
-                    document.getElementById('age-error').style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate interests (at least one must be selected)
-                const interests = document.querySelectorAll('input[name="interests[]"]:checked');
-                if (interests.length === 0) {
-                    document.getElementById('interests-error').style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate terms checkbox
-                const terms = document.querySelector('input[name="terms"]');
-                if (!terms.checked) {
-                    document.getElementById('terms-error').style.display = 'block';
-                    isValid = false;
-                }
-                
-                return isValid;
-            }
+                return false;
+            });
         });
-    </script>
+    }
+    
+    // Set up touch events for mobile devices
+    function setupTouchEvents() {
+        let touchItem = null;
+        let initialY = 0;
+        let currentY = 0;
+        
+        featureItems.forEach(item => {
+            // Touch start event
+            item.addEventListener('touchstart', function(e) {
+                touchItem = this;
+                initialY = e.touches[0].clientY;
+                this.classList.add('dragging');
+                
+                // Prevent scrolling while dragging
+                e.preventDefault();
+            }, { passive: false });
+            
+            // Touch move event
+            item.addEventListener('touchmove', function(e) {
+                if (touchItem) {
+                    currentY = e.touches[0].clientY;
+                    const deltaY = currentY - initialY;
+                    
+                    // Move the element with the touch
+                    const items = Array.from(featureRanking.querySelectorAll('.feature-item'));
+                    const touchIndex = items.indexOf(touchItem);
+                    const itemHeight = touchItem.offsetHeight;
+                    
+                    // Determine if we should move up or down based on direction and distance
+                    if (deltaY < -itemHeight/2 && touchIndex > 0) {
+                        // Move up
+                        featureRanking.insertBefore(touchItem, items[touchIndex - 1]);
+                        initialY = currentY;
+                        updateFeatureNumbers();
+                    } else if (deltaY > itemHeight/2 && touchIndex < items.length - 1) {
+                        // Move down
+                        featureRanking.insertBefore(items[touchIndex + 1], touchItem);
+                        initialY = currentY;
+                        updateFeatureNumbers();
+                    }
+                    
+                    // Prevent scrolling while dragging
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Touch end event
+            item.addEventListener('touchend', function() {
+                if (touchItem) {
+                    touchItem.classList.remove('dragging');
+                    touchItem = null;
+                }
+            });
+            
+            // Touch cancel event
+            item.addEventListener('touchcancel', function() {
+                if (touchItem) {
+                    touchItem.classList.remove('dragging');
+                    touchItem = null;
+                }
+            });
+        });
+    }
+    
+    // Update feature numbers after reordering
+    function updateFeatureNumbers() {
+        const items = document.querySelectorAll('.feature-item');
+        items.forEach((item, index) => {
+            const numberSpan = item.querySelector('.feature-number');
+            numberSpan.textContent = index + 1;
+        });
+        
+        // Update the hidden input with the current ranking
+        updateFeatureRankingInput();
+    }
+    
+    // Update the hidden input with the current ranking
+    function updateFeatureRankingInput() {
+        const featureRanking = [];
+        document.querySelectorAll('.feature-item').forEach(item => {
+            featureRanking.push(item.getAttribute('data-feature'));
+        });
+        featureRankingInput.value = JSON.stringify(featureRanking);
+    }
+    
+    // Form validation function
+    function validateForm() {
+        let isValid = true;
+        
+        // Reset all error messages
+        document.querySelectorAll('.error-message').forEach(msg => {
+            msg.style.display = 'none';
+        });
+        
+        // Validate name
+        const name = document.getElementById('name');
+        if (!name.value.trim()) {
+            document.getElementById('name-error').style.display = 'block';
+            isValid = false;
+        }
+        
+        // Validate email
+        const email = document.getElementById('email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+            document.getElementById('email-error').style.display = 'block';
+            isValid = false;
+        }
+        
+        // Validate age group
+        const ageGroup = document.getElementById('age-group');
+        if (!ageGroup.value) {
+            document.getElementById('age-error').style.display = 'block';
+            isValid = false;
+        }
+        
+        // Validate interests (at least one must be selected)
+        const interests = document.querySelectorAll('input[name="interests[]"]:checked');
+        if (interests.length === 0) {
+            document.getElementById('interests-error').style.display = 'block';
+            isValid = false;
+        }
+        
+        // Validate terms checkbox
+        const terms = document.querySelector('input[name="terms"]');
+        if (!terms.checked) {
+            document.getElementById('terms-error').style.display = 'block';
+            isValid = false;
+        }
+        
+        return isValid;
+    }
+});
+</script>
 </body>
 </html>
