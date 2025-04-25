@@ -1,0 +1,834 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Buddy App Sign-up</title>
+    <style>
+        :root {
+            --primary: #3f51b5;
+            --primary-dark: #303f9f;
+            --primary-light: #c5cae9;
+            --accent: #ff9800;
+            --accent-dark: #f57c00;
+            --text-dark: #263238;
+            --text-light: #ffffff;
+            --error: #f44336;
+            --success: #4caf50;
+            --gray-light: #f5f5f5;
+            --gray: #e0e0e0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--gray-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--text-light);
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid var(--gray);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+        
+        .checkbox-group {
+            margin-top: 0.5rem;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .checkbox-label input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 3px;
+            cursor: pointer;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: var(--text-light);
+            border: none;
+            border-radius: 6px;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: var(--accent-dark);
+        }
+        
+        .back-link {
+            display: block;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 12px 24px;
+            font-weight: 500;
+            margin: 1.5rem auto 0;
+            text-align: center;
+            width: fit-content;
+            transition: color 0.2s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .form-header {
+            background-color: var(--primary-light);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray);
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .feature-ranking {
+            margin-top: 15px;
+        }
+        
+        .feature-item {
+            background-color: var(--gray-light);
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--gray);
+            cursor: move;
+            color: var(--text-dark);
+            position: relative;
+            touch-action: none;
+            user-select: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-item.dragging {
+            opacity: 0.7;
+            background-color: var(--primary-light);
+            border-color: var(--primary);
+        }
+        
+        .feature-item.over {
+            border: 2px dashed var(--primary);
+        }
+        
+        .feature-number {
+            display: inline-flex;
+            width: 28px;
+            height: 28px;
+            background-color: var(--primary);
+            color: var(--text-light);
+            border-radius: 50%;
+            text-align: center;
+            margin-right: 12px;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .feature-text {
+            flex-grow: 1;
+        }
+        
+        .feature-handle {
+            margin-left: 10px;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: move;
+            flex-shrink: 0;
+        }
+        
+        .touch-helper {
+            color: var(--primary-dark);
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-align: center;
+            padding: 8px;
+            background-color: var(--primary-light);
+            border-radius: 4px;
+        }
+        
+        .thankyou-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--gray-light);
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid var(--success);
+        }
+        
+        .thankyou-message h2 {
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+        
+        .success-icon {
+            font-size: 60px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--error);
+            display: none;
+        }
+        
+        .input-icon.valid {
+            color: var(--success);
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 8px;
+            cursor: help;
+        }
+        
+        .tooltip-icon {
+            color: var(--primary);
+            font-size: 16px;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .progress-container {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+  
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .logo-text {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .form-header {
+                padding: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-text"><span class="logo-icon">📖</span>Bible Buddy</div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-labels">
+                <span>Start</span>
+                <span>Complete</span>
+            </div>
+        </div>
+        
+        <div class="form-header">
+            <h1>Sign Up for Bible Buddy App Updates</h1>
+            <p>Help us build the perfect Bible study companion! Your input will shape the future of Bible study and community. Fill out the form below to receive updates and provide valuable feedback.</p>
+        </div>
+        
+        <form id="marketResearchForm" action="https://formsubmit.co/biblebuddyapp1@gmail.com" method="POST">
+            <!-- FormSubmit Anti-Spam -->
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Bible Buddy App Market Research Submission">
+            <input type="hidden" name="_next" value="thankyou.html">
+            
+            <div class="form-group">
+                <label for="name">Full Name <span aria-hidden="true" style="color:var(--error)">*</span></label>
+                <div class="input-with-icon">
+                    <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error">
+                    <span class="input-icon" id="name-icon">⚠️</span>
+                </div>
+                <div class="error-message" id="name-error" role="alert">Please enter your name</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address <span aria-hidden="true" style="color:var(--error)">*</span></label>
+                <div class="input-with-icon">
+                    <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error">
+                    <span class="input-icon" id="email-icon">⚠️</span>
+                </div>
+                <div class="error-message" id="email-error" role="alert">Please enter a valid email address</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional)</label>
+                <input type="tel" id="phone" name="phone" aria-describedby="phone-format">
+                <div id="phone-format" class="error-message">Please enter a valid phone number</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="age-group">Age Group <span aria-hidden="true" style="color:var(--error)">*</span></label>
+                <select id="age-group" name="age-group" required aria-required="true" aria-describedby="age-error">
+                    <option value="">Please select...</option>
+                    <option value="Under 18">Under 18</option>
+                    <option value="18-24">18-24</option>
+                    <option value="25-34">25-34</option>
+                    <option value="35-44">35-44</option>
+                    <option value="45-54">45-54</option>
+                    <option value="55+">55+</option>
+                </select>
+                <div class="error-message" id="age-error" role="alert">Please select your age group</div>
+            </div>
+            
+            <div class="form-group">
+                <label>I'm interested in: <span aria-hidden="true" style="color:var(--error)">*</span></label>
+                <div class="checkbox-group" role="group" aria-labelledby="interests-group">
+                    <span id="interests-group" class="sr-only">Select at least one interest</span>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests[]" value="Bible Study" aria-describedby="interests-error"> Bible Study Tools
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests[]" value="Community" aria-describedby="interests-error"> Bible Study Partner (Community)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests[]" value="Games" aria-describedby="interests-error"> Bible Games & Trivia
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests[]" value="study rooms" aria-describedby="interests-error"> Virtual Study Rooms
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests[]" value="Daily Devotionals" aria-describedby="interests-error"> Daily Devotionals
+                    </label>
+                </div>
+                <div class="error-message" id="interests-error" role="alert">Please select at least one interest</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Rank these potential features in order of importance to you:
+                    <div class="tooltip">
+                        <span class="tooltip-icon">ℹ️</span>
+                        <span class="tooltip-text">Drag and drop the items to reorder them based on your preference</span>
+                    </div>
+                </label>
+                <div class="touch-helper" id="touch-helper">
+                    <span aria-hidden="true">↕️</span> Tap and hold to drag items to reorder
+                </div>
+                <div class="feature-ranking" id="feature-ranking" aria-label="Drag to reorder features" role="listbox">
+                    <div class="feature-item" draggable="true" data-feature="daily-verse" role="option">
+                        <span class="feature-number" aria-hidden="true">1</span>
+                        <span class="feature-text">Daily Verse with Commentary</span>
+                        <span class="feature-handle" aria-hidden="true">⋮⋮</span>
+                    </div>
+                    <div class="feature-item" draggable="true" data-feature="study-rooms" role="option">
+                        <span class="feature-number" aria-hidden="true">2</span>
+                        <span class="feature-text">Virtual Study Rooms</span>
+                        <span class="feature-handle" aria-hidden="true">⋮⋮</span>
+                    </div>
+                    <div class="feature-item" draggable="true" data-feature="journal" role="option">
+                        <span class="feature-number" aria-hidden="true">3</span>
+                        <span class="feature-text">Personal Bible Journal</span>
+                        <span class="feature-handle" aria-hidden="true">⋮⋮</span>
+                    </div>
+                    <div class="feature-item" draggable="true" data-feature="offline" role="option">
+                        <span class="feature-number" aria-hidden="true">4</span>
+                        <span class="feature-text">Offline Bible Access</span>
+                        <span class="feature-handle" aria-hidden="true">⋮⋮</span>
+                    </div>
+                    <div class="feature-item" draggable="true" data-feature="trivia" role="option">
+                        <span class="feature-number" aria-hidden="true">5</span>
+                        <span class="feature-text">Bible Trivia Games</span>
+                        <span class="feature-handle" aria-hidden="true">⋮⋮</span>
+                    </div>
+                    <div class="feature-item" draggable="true" data-feature="collaborative" role="option">
+                        <span class="feature-number" aria-hidden="true">6</span>
+                        <span class="feature-text">Collaborative Bible Study</span>
+                        <span class="feature-handle" aria-hidden="true">⋮⋮</span>
+                    </div>
+                </div>
+                <input type="hidden" id="feature-ranking-input" name="feature-ranking">
+            </div>
+            
+            <div class="form-group">
+                <label for="bible-version">Preferred Bible Version</label>
+                <select id="bible-version" name="bible-version">
+                    <option value="">Please select...</option>
+                    <option value="KJV">King James Version (KJV)</option>
+                    <option value="NIV">New International Version (NIV)</option>
+                    <option value="ESV">English Standard Version (ESV)</option>
+                    <option value="NKJV">New King James Version (NKJV)</option>
+                    <option value="NLT">New Living Translation (NLT)</option>
+                    <option value="CSB">Christian Standard Bible (CSB)</option>
+                    <option value="NASB">New American Standard Bible (NASB)</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="study-frequency">How often do you study the Bible?</label>
+                <select id="study-frequency" name="study-frequency">
+                    <option value="">Please select...</option>
+                    <option value="daily">Daily</option>
+                    <option value="several-times-week">Several times a week</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="occasionally">Occasionally</option>
+                    <option value="rarely">Rarely/Never but interested</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">What would make the Bible Buddy App valuable to you?</label>
+                <textarea id="message" name="message" rows="3" aria-label="Enter your feedback about what would make the Bible Buddy App valuable to you"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="terms" value="agreed" required aria-required="true" aria-describedby="terms-error">
+                    <span>I agree to receive email updates about the Bible Buddy App <span aria-hidden="true" style="color:var(--error)">*</span></span>
+                </label>
+                <div class="error-message" id="terms-error" role="alert">You must agree to receive updates</div>
+            </div>
+            
+            <button type="submit" class="btn" id="submit-button">Sign Up Now</button>
+        </form>
+        
+        <div class="thankyou-message" id="thankyou-message" role="alert" aria-live="polite">
+            <div class="success-icon">✓</div>
+            <h2>Thank You!</h2>
+            <p>Your feedback will help us create the best possible Bible Buddy experience.</p>
+            <p>We'll keep you updated on our progress.</p>
+            <a href="t" class="back-link">Return to Homepage</a>
+        </div>
+        
+        <a href="linkpage2.html" class="back-link">← Back to Resources</a>
+        
+        <div class="form-footer">
+            <p>Your information will only be used to send you updates and for market research about the Bible Buddy App. We will never share your information with third parties.</p>  <p>Contact: <a href="mailto:biblebuddyapp1@gmail.com">biblebuddyapp1@gmail.com</a></p>
+       
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('marketResearchForm');
+            const thankYouMessage = document.getElementById('thankyou-message');
+            const featureRankingInput = document.getElementById('feature-ranking-input');
+            const featureRanking = document.getElementById('feature-ranking');
+            const featureItems = document.querySelectorAll('.feature-item');
+            
+            // Initialize feature ranking controls
+            setupFeatureRanking();
+            
+            // Initialize form validation
+            form.addEventListener('submit', function(e) {
+                if (!validateForm()) {
+                    e.preventDefault(); // Prevent form submission if validation fails
+                }
+            });
+            
+            // Setup feature ranking functionality
+            function setupFeatureRanking() {
+                // Initialize drag and drop for desktop devices
+                setupDragAndDrop();
+                
+                // Initialize touch events for mobile devices
+                setupTouchEvents();
+                
+                // Update the hidden input with the current ranking
+                updateFeatureRankingInput();
+            }
+            
+            // Set up drag and drop for desktop devices
+            function setupDragAndDrop() {
+                let draggedItem = null;
+                
+                featureItems.forEach(item => {
+                    // Drag start event
+                    item.addEventListener('dragstart', function(e) {
+                        draggedItem = this;
+                        setTimeout(() => this.classList.add('dragging'), 0);
+                        
+                        // For Firefox compatibility
+                        e.dataTransfer.setData('text/plain', '');
+                        e.dataTransfer.effectAllowed = 'move';
+                    });
+                    
+                    // Drag end event
+                    item.addEventListener('dragend', function() {
+                        this.classList.remove('dragging');
+                        draggedItem = null;
+                        document.querySelectorAll('.feature-item').forEach(item => {
+                            item.classList.remove('over');
+                        });
+                    });
+                    
+                    // Drag over event
+                    item.addEventListener('dragover', function(e) {
+                        e.preventDefault();
+                        return false;
+                    });
+                    
+                    // Drag enter event
+                    item.addEventListener('dragenter', function(e) {
+                        e.preventDefault();
+                        if (this !== draggedItem) {
+                            this.classList.add('over');
+                        }
+                    });
+                    
+                    // Drag leave event
+                    item.addEventListener('dragleave', function() {
+                        this.classList.remove('over');
+                    });
+                    
+                    // Drop event
+                    item.addEventListener('drop', function(e) {
+                        e.preventDefault();
+                        if (this !== draggedItem) {
+                            const allItems = Array.from(featureRanking.querySelectorAll('.feature-item'));
+                            const draggedIndex = allItems.indexOf(draggedItem);
+                            const targetIndex = allItems.indexOf(this);
+                            
+                            if (draggedIndex < targetIndex) {
+                                featureRanking.insertBefore(draggedItem, this.nextElementSibling);
+                            } else {
+                                featureRanking.insertBefore(draggedItem, this);
+                            }
+                            
+                            updateFeatureNumbers();
+                        }
+                        return false;
+                    });
+                });
+            }
+            
+            // Set up touch events for mobile devices
+            function setupTouchEvents() {
+                let touchItem = null;
+                let initialY = 0;
+                let currentY = 0;
+                
+                featureItems.forEach(item => {
+                    // Touch start event
+                    item.addEventListener('touchstart', function(e) {
+                        touchItem = this;
+                        initialY = e.touches[0].clientY;
+                        this.classList.add('dragging');
+                        
+                        // Prevent scrolling while dragging
+                        e.preventDefault();
+                    }, { passive: false });
+                    
+                    // Touch move event
+                    item.addEventListener('touchmove', function(e) {
+                        if (touchItem) {
+                            currentY = e.touches[0].clientY;
+                            const deltaY = currentY - initialY;
+                            
+                            // Move the element with the touch
+                            const items = Array.from(featureRanking.querySelectorAll('.feature-item'));
+                            const touchIndex = items.indexOf(touchItem);
+                            const itemHeight = touchItem.offsetHeight;
+                            
+                            // Determine if we should move up or down based on direction and distance
+                            if (deltaY < -itemHeight/2 && touchIndex > 0) {
+                                // Move up
+                                featureRanking.insertBefore(touchItem, items[touchIndex - 1]);
+                                initialY = currentY;
+                                updateFeatureNumbers();
+                            } else if (deltaY > itemHeight/2 && touchIndex < items.length - 1) {
+                                // Move down
+                                featureRanking.insertBefore(items[touchIndex + 1], touchItem);
+                                initialY = currentY;
+                                updateFeatureNumbers();
+                            }
+                            
+                            // Prevent scrolling while dragging
+                            e.preventDefault();
+                        }
+                    }, { passive: false });
+                    
+                    // Touch end event
+                    item.addEventListener('touchend', function() {
+                        if (touchItem) {
+                            touchItem.classList.remove('dragging');
+                            touchItem = null;
+                        }
+                    });
+                    
+                    // Touch cancel event
+                    item.addEventListener('touchcancel', function() {
+                        if (touchItem) {
+                            touchItem.classList.remove('dragging');
+                            touchItem = null;
+                        }
+                    });
+                });
+            }
+            
+            // Update feature numbers after reordering
+            function updateFeatureNumbers() {
+                const items = document.querySelectorAll('.feature-item');
+                items.forEach((item, index) => {
+                    const numberSpan = item.querySelector('.feature-number');
+                    numberSpan.textContent = index + 1;
+                });
+                
+                // Update the hidden input with the current ranking
+                updateFeatureRankingInput();
+            }
+            
+            // Update the hidden input with the current ranking
+            function updateFeatureRankingInput() {
+                const featureRanking = [];
+                document.querySelectorAll('.feature-item').forEach(item => {
+                    featureRanking.push(item.getAttribute('data-feature'));
+                });
+                featureRankingInput.value = JSON.stringify(featureRanking);
+            }
+            
+            // Form validation function
+            function validateForm() {
+                let isValid = true;
+                
+                // Reset all error messages
+                document.querySelectorAll('.error-message').forEach(msg => {
+                    msg.style.display = 'none';
+                });
+                
+                // Validate name
+                const name = document.getElementById('name');
+                if (!name.value.trim()) {
+                    document.getElementById('name-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate email
+                const email = document.getElementById('email');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    document.getElementById('email-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate age group
+                const ageGroup = document.getElementById('age-group');
+                if (!ageGroup.value) {
+                    document.getElementById('age-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate interests (at least one must be selected)
+                const interests = document.querySelectorAll('input[name="interests[]"]:checked');
+                if (interests.length === 0) {
+                    document.getElementById('interests-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate terms checkbox
+                const terms = document.querySelector('input[name="terms"]');
+                if (!terms.checked) {
+                    document.getElementById('terms-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easter in the Old Testament: Guess the Story Challenge</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f6f2;
+            color: #333;
+        }
+        header {
+            background-color: #0396ff;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+        .banner {
+            background: linear-gradient(rgba(1, 147, 245, 0.815), rgba(0, 162, 255, 0.804)), 
+                        url('/api/placeholder/800/200') center/cover no-repeat;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .banner h1 {
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .instructions {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .story-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #6b2d5c;
+        }
+        .story-number {
+            background-color: #6b2d5c;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+        }
+        .story-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .hint-button {
+            background-color: #ddd;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .hint {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: #f3f3f3;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .answer {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: #e6f7ff;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: none;
+            border-left: 3px solid #0396ff;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #6b2d5c;
+            color: white;
+            font-size: 0.8rem;
+            position: relative;
+            margin-top: 2rem;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #6b2d5c;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .answer-button {
+            background-color: #e0f0ff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .back-link {
+    display: block;  
+    background-color: #b25e2d;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin: 1.5rem auto 0;  
+    text-align: center;
+    width: fit-content;  
+    transition: background-color 0.2s ease;
+}
+        .back-link:hover {
+            background-color: #d26e3d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>EASTER IN THE OLD TESTAMENT:<br>GUESS THE STORY CHALLENGE</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="instructions">
+            <h2>Team Challenge Instructions:</h2>
+            <p>1. Read each description of an Old Testament story</p>
+            <p>2. Try to identify which Bible story is being described</p>
+            <p>3. Text your answer and how it connects to Easter to your Youth Leader</p>
+            <p>4. First team to guess correctly gets 5 points!</p>
+            <p>5. Use hints if needed, but you'll receive fewer points</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">1</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a father was asked to sacrifice his only son on a mountain. At the last moment, God provided a ram caught in a thicket as a substitute. This foreshadows how God would provide His own Son as a sacrifice for our sins.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint1')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer1')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint1">
+                <p>This story involves someone whose name means "father of many nations".</p>
+            </div>
+            <div class="answer" id="answer1">
+                <p><strong>Answer:</strong> Abraham and Isaac (Genesis 22:1-19)</p>
+                <p><strong>Easter Connection:</strong> Just as God provided a ram as a substitute sacrifice for Isaac, God provided Jesus as the substitute sacrifice for humanity. This story points to God's provision of the ultimate Passover Lamb.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">2</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a man was thrown into a lions' den for praying to God, but emerged unharmed the next morning. Like this man, Jesus was sealed in a tomb but emerged alive, defeating death.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint2')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer2')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint2">
+                <p>This prophet interpreted dreams for kings in Babylon.</p>
+            </div>
+            <div class="answer" id="answer2">
+                <p><strong>Answer:</strong> Daniel in the Lions' Den (Daniel 6:1-28)</p>
+                <p><strong>Easter Connection:</strong> Daniel was sealed in the lions' den with the king's signet ring, just as Jesus' tomb was sealed. Both emerged alive after their ordeal, showing God's power over death.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">3</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, families marked their doorposts with the blood of a perfect lamb, and death "passed over" their homes. This directly points to how Jesus' blood, as the perfect Lamb of God, saves us from spiritual death.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint3')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer3')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint3">
+                <p>This story takes place during the final plague in Egypt before the Israelites' exodus.</p>
+            </div>
+            <div class="answer" id="answer3">
+                <p><strong>Answer:</strong> The First Passover (Exodus 12:1-30)</p>
+                <p><strong>Easter Connection:</strong> Jesus is our Passover Lamb (1 Corinthians 5:7). Just as the blood of the lamb saved the Israelites from physical death, Jesus' blood saves believers from spiritual death.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">4</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a prophet was swallowed by a great fish and spent three days and nights in its belly before being spit out onto dry land. Jesus specifically referenced this story as a sign of His coming death and resurrection.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint4')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer4')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint4">
+                <p>This prophet was trying to avoid going to Nineveh to preach repentance.</p>
+            </div>
+            <div class="answer" id="answer4">
+                <p><strong>Answer:</strong> Jonah and the Great Fish (Jonah 1:17-2:10)</p>
+                <p><strong>Easter Connection:</strong> Jesus said, "For as Jonah was three days and three nights in the belly of a huge fish, so the Son of Man will be three days and three nights in the heart of the earth" (Matthew 12:40). Jonah's experience directly foreshadowed Jesus' time in the tomb and His resurrection.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">5</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a bronze serpent was lifted up on a pole, and anyone who looked upon it was healed from deadly snake bites. Jesus compared His crucifixion to this event, saying He would be "lifted up" to save those who believe.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint5')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer5')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint5">
+                <p>This story takes place during the Israelites' wandering in the wilderness after they complained about God's provision.</p>
+            </div>
+            <div class="answer" id="answer5">
+                <p><strong>Answer:</strong> The Bronze Serpent (Numbers 21:4-9)</p>
+                <p><strong>Easter Connection:</strong> Jesus said, "Just as Moses lifted up the snake in the wilderness, so the Son of Man must be lifted up, that everyone who believes may have eternal life in him" (John 3:14-15). Like the Israelites were healed by looking at the lifted serpent, we are saved by looking to Christ lifted on the cross.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">6</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a young shepherd defeated a giant enemy with just a stone and sling. Later, this shepherd became a king whose royal line would eventually include the Messiah. His defeat of the giant foreshadows Christ's victory over sin and death.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint6')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer6')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint6">
+                <p>This young man would later be known as "a man after God's own heart" and write many psalms.</p>
+            </div>
+            <div class="answer" id="answer6">
+                <p><strong>Answer:</strong> David and Goliath (1 Samuel 17:1-51)</p>
+                <p><strong>Easter Connection:</strong> David's unlikely victory over Goliath prefigures Jesus' victory over sin and death. The humble shepherd boy who became king foreshadows Jesus, the Good Shepherd and King of Kings, born in David's hometown of Bethlehem.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">7</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a woman and her mother-in-law were widowed and destitute. The younger woman married a "kinsman redeemer" who rescued them from poverty. This story illustrates Christ as our Kinsman Redeemer who purchases us with His blood.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint7')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer7')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint7">
+                <p>This woman was a Moabite who became part of the lineage of Jesus, despite being a foreigner.</p>
+            </div>
+            <div class="answer" id="answer7">
+                <p><strong>Answer:</strong> Ruth and Boaz (Book of Ruth)</p>
+                <p><strong>Easter Connection:</strong> Boaz acts as a "kinsman redeemer" for Ruth, paying the price to redeem her. This foreshadows how Jesus, our Kinsman Redeemer, paid the price with His blood to redeem us from sin and death.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">8</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a man lost everything—his wealth, his health, and his children—yet maintained his faith. His suffering and eventual restoration prefigure Christ's suffering and victory. His famous declaration, "I know that my redeemer lives," points directly to Easter hope.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint8')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer8')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint8">
+                <p>This man's friends tried to convince him that his suffering was punishment for sin, but God said they were wrong.</p>
+            </div>
+            <div class="answer" id="answer8">
+                <p><strong>Answer:</strong> Job (Book of Job)</p>
+                <p><strong>Easter Connection:</strong> Job declared, "I know that my redeemer lives, and that in the end he will stand on the earth" (Job 19:25). This prophetic statement points to the resurrection of Jesus. Job's suffering and restoration also parallel Christ's suffering and resurrection.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">9</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a holy feast was established where bread without yeast was eaten for seven days. This unleavened bread symbolizes sinlessness and purity, pointing to Christ's sinless sacrifice.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint9')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer9')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint9">
+                <p>This feast commemorates the Israelites leaving Egypt so quickly that they didn't have time for their bread to rise.</p>
+            </div>
+            <div class="answer" id="answer9">
+                <p><strong>Answer:</strong> Feast of Unleavened Bread (Exodus 12:14-20)</p>
+                <p><strong>Easter Connection:</strong> The unleavened bread of this feast foreshadows Jesus, who was without sin (yeast often symbolizes sin). Paul writes, "Christ, our Passover lamb, has been sacrificed. Therefore let us keep the Festival, not with the old bread leavened with malice and wickedness, but with the unleavened bread of sincerity and truth" (1 Corinthians 5:7-8).</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">10</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, two brothers brought offerings to God. One offering was accepted, the other rejected. The rejected brother killed the accepted brother out of jealousy. Jesus referred to the murdered brother's blood when speaking of His own coming sacrifice.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint10')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer10')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint10">
+                <p>These were the first two sons born to the first man and woman on earth.</p>
+            </div>
+            <div class="answer" id="answer10">
+                <p><strong>Answer:</strong> Cain and Abel (Genesis 4:1-16)</p>
+                <p><strong>Easter Connection:</strong> Abel's blood cried out from the ground after his murder. Hebrews 12:24 says the blood of Jesus "speaks a better word than the blood of Abel." While Abel's blood cried for justice, Jesus' blood speaks of forgiveness and redemption.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">11</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a priest-king blessed a patriarch after battle and brought out bread and wine. This mysterious figure, who had no recorded beginning or end, prefigures Christ's eternal priesthood.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint11')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer11')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint11">
+                <p>This priest was the king of Salem (later Jerusalem) and his name means "king of righteousness."</p>
+            </div>
+            <div class="answer" id="answer11">
+                <p><strong>Answer:</strong> Melchizedek blessing Abraham (Genesis 14:18-20)</p>
+                <p><strong>Easter Connection:</strong> Hebrews 7 explains that Jesus is "a priest forever, in the order of Melchizedek." The bread and wine Melchizedek brought prefigure communion, and his mysterious appearance without genealogy points to Christ's eternal nature.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">12</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a young man was sold by his brothers into slavery, falsely accused and imprisoned, but later rose to power and saved many lives. His journey from suffering to glory mirrors Christ's death and resurrection.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint12')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer12')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint12">
+                <p>This man became second-in-command in Egypt and had a coat of many colors.</p>
+            </div>
+            <div class="answer" id="answer12">
+                <p><strong>Answer:</strong> Joseph (Genesis 37-50)</p>
+                <p><strong>Easter Connection:</strong> Joseph was betrayed by his brothers, suffered unjustly, and was later exalted to save his people—paralleling Jesus' betrayal, crucifixion, and resurrection. Joseph told his brothers, "You intended to harm me, but God intended it for good to accomplish what is now being done, the saving of many lives" (Genesis 50:20).</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">13</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a miraculous food appeared each morning to feed God's people in the wilderness. Jesus later identified Himself as the true bread from heaven that gives eternal life.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint13')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer13')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint13">
+                <p>The people asked "What is it?" when they first saw this food, and this question became its name.</p>
+            </div>
+            <div class="answer" id="answer13">
+                <p><strong>Answer:</strong> Manna in the Wilderness (Exodus 16:1-36)</p>
+                <p><strong>Easter Connection:</strong> Jesus said, "I am the bread of life. Your ancestors ate the manna in the wilderness, yet they died. But here is the bread that comes down from heaven, which anyone may eat and not die" (John 6:48-50). The manna foreshadowed Jesus as God's provision for spiritual life.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">14</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a prophet demonstrated God's power by calling fire from heaven to consume a water-soaked sacrifice. This miraculous fire prefigures how God accepted Christ's sacrifice on our behalf.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint14')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer14')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint14">
+                <p>This prophet had a showdown with the prophets of Baal on Mount Carmel.</p>
+            </div>
+            <div class="answer" id="answer14">
+                <p><strong>Answer:</strong> Elijah on Mount Carmel (1 Kings 18:20-40)</p>
+                <p><strong>Easter Connection:</strong> Just as God sent fire to consume Elijah's sacrifice, showing His acceptance, God demonstrated His acceptance of Jesus' sacrifice through the resurrection. Both events showed God's power over false gods and death itself.</p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <span class="story-number">15</span>
+            <div class="story-text">
+                <strong>Guess the Story:</strong> In this story, a righteous man built a massive boat to save his family and animals from a worldwide flood. Peter compares this salvation through water to baptism, which symbolizes our death to sin and resurrection to new life in Christ.
+            </div>
+            <div class="buttons">
+                <button class="hint-button" onclick="showHint('hint15')">Need a hint?</button>
+                <button class="answer-button" onclick="showAnswer('answer15')">Reveal Answer</button>
+            </div>
+            <div class="hint" id="hint15">
+                <p>After the waters receded, God made a covenant with this man and gave the rainbow as a sign.</p>
+            </div>
+            <div class="answer" id="answer15">
+                <p><strong>Answer:</strong> Noah and the Ark (Genesis 6-9)</p>
+                <p><strong>Easter Connection:</strong> 1 Peter 3:20-21 says, "In it only a few people, eight in all, were saved through water, and this water symbolizes baptism that now saves you also—not the removal of dirt from the body but the pledge of a clear conscience toward God. It saves you by the resurrection of Jesus Christ." The ark passing through the flood waters foreshadows how Christians pass from death to life through Christ's resurrection.</p>
+            </div>
+        </div>
+    </div>
+    
+    <a href="linkpage2.html" class="back-link">← Back to Resources</a>
+        
+    <footer>
+        <p>INSPIRED TO SPEAK: Easter Old Testament Challenge</p>
+        <p>Easter Foreshadowing Edition</p>  <p>Contact: <a href="mailto:biblebuddyapp1@gmail.com">biblebuddyapp1@gmail.com</a></p>
+       
+    </footer>
+
+    <script>
+        function showHint(hintId) {
+            const hint = document.getElementById(hintId);
+            if (hint.style.display === "block") {
+                hint.style.display = "none";
+            } else {
+                hint.style.display = "block";
+            }
+            updateProgress();
+        }
+        
+        function showAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                answer.style.display = "block";
+            }
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalItems = document.querySelectorAll('.story-card').length * 2; // 2 items per card (hint and answer)
+            const visibleItems = document.querySelectorAll('.hint[style="display: block"], .answer[style="display: block"]').length;
+            const progressPercent = (visibleItems / totalItems) * 100;
+            document.getElementById('progress').style.width = progressPercent + '%';
+        }
+    </script>
+</body>
+</html>

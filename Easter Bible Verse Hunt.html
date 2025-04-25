@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f6f2;
+            color: #333;
+        }
+        header {
+            background-color: #0396ff;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+        .banner {
+            background: linear-gradient(rgba(1, 147, 245, 0.815), rgba(0, 162, 255, 0.804)), 
+                        url('/api/placeholder/800/200') center/cover no-repeat;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .banner h1 {
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin: 0;
+        }
+        .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+   
+
+        }
+        .instructions {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .clue-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #6b2d5c;
+        }
+        .clue-number {
+            background-color: #6b2d5c;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+        }
+        .clue-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .hint-button {
+            background-color: #ddd;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .hint {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: #f3f3f3;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #6b2d5c;
+            color: white;
+            font-size: 0.8rem;
+            position: relative;
+            margin-top: 2rem;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #6b2d5c;
+            width: 0%;
+            transition: width 0.3s ease;
+        } 
+        .back-link {
+    display: block;  /* Change from flex to block */
+    background-color: #b25e2d;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin: 1.5rem auto 0;  /* Added auto for horizontal centering */
+    text-align: center;
+    width: fit-content;  /* Make it only as wide as needed */
+    transition: background-color 0.2s ease;
+}
+        
+    
+        .back-link:hover {
+            background-color: #d26e3d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>INSPIRED TO SPEAK: EASTER BIBLE VERSE HUNT</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="instructions">
+            <h2>Team Challenge Instructions:</h2>
+            <p>1. Work together to solve each clue</p>
+            <p>2. Find the Old Testament verse in your Bible app</p>
+            <p>3. Text the verse reference and how it connects to Easter to your Youth Leader</p>
+            <p>4. First team to text the correct answer gets 5 points!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="clue-card">
+            <span class="clue-number">1</span>
+            <div class="clue-text">
+                <strong>Easter Clue:</strong> Find the Old Testament passage that prophesied Jesus would enter Jerusalem on a donkey, leading to shouts of joy.
+            </div>
+            <button class="hint-button" onclick="showHint('hint1')">Need a hint?</button>
+            <div class="hint" id="hint1">
+                <p>This prophecy is found in one of the Minor Prophets whose name starts with "Z".</p>
+            </div>
+        </div>
+
+        <div class="clue-card">
+            <span class="clue-number">2</span>
+            <div class="clue-text">
+                <strong>Easter Clue:</strong> Find the Old Testament passage that describes someone's hands and feet being pierced, and people casting lots for his clothing, 1000 years before crucifixion was invented.
+            </div>
+            <button class="hint-button" onclick="showHint('hint2')">Need a hint?</button>
+            <div class="hint" id="hint2">
+                <p>This prophecy is found in a Psalm written by David.</p>
+            </div>
+        </div>
+
+        <div class="clue-card">
+            <span class="clue-number">3</span>
+            <div class="clue-text">
+                <strong>Easter Clue:</strong> Find the Old Testament passage that describes a Suffering Servant who was "pierced for our transgressions" and by whose "wounds we are healed."
+            </div>
+            <button class="hint-button" onclick="showHint('hint3')">Need a hint?</button>
+            <div class="hint" id="hint3">
+                <p>This prophecy is found in a book named after a major prophet who wrote around 700 BC.</p>
+            </div>
+        </div>
+
+        <div class="clue-card">
+            <span class="clue-number">4</span>
+            <div class="clue-text">
+                <strong>Easter Clue:</strong> Find the Old Testament passage that gives a prophecy about the exact amount of money for which Jesus would be betrayed.
+            </div>
+            <button class="hint-button" onclick="showHint('hint4')">Need a hint?</button>
+            <div class="hint" id="hint4">
+                <p>This prophecy mentions "thirty pieces of silver" and is found in a book named after a prophet whose name starts with "Z".</p>
+            </div>
+        </div>
+
+        <div class="clue-card">
+            <span class="clue-number">5</span>
+            <div class="clue-text">
+                <strong>Easter Clue:</strong> Find the Old Testament passage that predicts the Messiah would be born in Bethlehem.
+            </div>
+            <button class="hint-button" onclick="showHint('hint5')">Need a hint?</button>
+            <div class="hint" id="hint5">
+                <p>This prophecy is found in one of the Minor Prophets whose name starts with "M".</p>
+            </div>
+        </div>
+
+        <div class="clue-card">
+            <span class="clue-number">6</span>
+            <div class="clue-text">
+                <strong>Easter Clue:</strong> Find the Old Testament passage that tells of a man who spent three days and nights in the belly of a great fish, foreshadowing Jesus' time in the tomb.
+            </div>
+            <button class="hint-button" onclick="showHint('hint6')">Need a hint?</button>
+            <div class="hint" id="hint6">
+                <p>Jesus Himself referred to this story as a sign of His resurrection in Matthew 12:40.</p>
+            </div>
+        </div>
+
+        <div class="clue-card">
+            <span class="clue-number">7</span>
+            <div class="clue-text">
+                <strong>Easter Clue:</strong> Find the Old Testament passage that describes a stone being rejected by builders but becoming the cornerstone.
+            </div>
+            <button class="hint-button" onclick="showHint('hint7')">Need a hint?</button>
+            <div class="hint" id="hint7">
+                <p>This prophecy is found in a Psalm that is often quoted in the New Testament.</p>
+            </div>
+        </div>
+
+        <div class="clue-card">
+            <span class="clue-number">8</span>
+            <div class="clue-text">
+                <strong>Easter Clue:</strong> Find the Old Testament passage that speaks of "one they have pierced" whom people will mourn for "as one mourns for an only child."
+            </div>
+            <button class="hint-button" onclick="showHint('hint8')">Need a hint?</button>
+            <div class="hint" id="hint8">
+                <p>This prophecy is found in the last chapter of a book named after a prophet whose name starts with "Z".</p>
+            </div>
+        </div>
+    </div>
+    <a href="linkpage2.html" class="back-link">← Back to Resources</a>
+        
+    <footer>
+        <p>INSPIRED TO SPEAK: Easter Bible Trivia</p>
+        <p>Old Testament Prophecy Edition</p>
+        <p>Contact: <a href="mailto:biblebuddyapp1@gmail.com">biblebuddyapp1@gmail.com</a></p>
+       
+    </footer>
+   
+
+    <script>
+        function showHint(hintId) {
+            const hint = document.getElementById(hintId);
+            if (hint.style.display === "block") {
+                hint.style.display = "none";
+            } else {
+                hint.style.display = "block";
+            }
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalClues = document.querySelectorAll('.clue-card').length;
+            const hintsVisible = document.querySelectorAll('.hint[style="display: block"]').length;
+            const progressPercent = (hintsVisible / totalClues) * 100;
+            document.getElementById('progress').style.width = progressPercent + '%';
+        }
+    </script>
+</body>
+</html>

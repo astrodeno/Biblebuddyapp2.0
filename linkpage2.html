@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easter Bible Resources Links</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e8f0ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 90%;
+            width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Typography */
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+        
+        h1 {
+            color: #6b2d5c;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #6b2d5c;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0.5rem 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        /* Resource Cards */
+        .link-card {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Card Colors */
+        .card-purple {
+            background-color: #f5eef5;
+            border-left: 4px solid #6b2d5c;
+        }
+        
+        .card-green {
+            background-color: #eef5ee;
+            border-left: 4px solid #2d6b3e;
+        }
+        
+        .card-orange {
+            background-color: #f5f0ee;
+            border-left: 4px solid #b25e2d;
+        }
+        
+        .card-blue {
+            background-color: #eef0f5;
+            border-left: 4px solid #0396ff;
+        }
+        
+        /* Button Styles */
+        .button-purple {
+            background-color: #6b2d5c;
+        }
+        .button-purple:hover {
+            background-color: #8b3d7c;
+        }
+        
+        .button-green {
+            background-color: #2d6b3e;
+        }
+        .button-green:hover {
+            background-color: #3d8b4e;
+        }
+        
+        .button-orange {
+            background-color: #b25e2d;
+        }
+        .button-orange:hover {
+            background-color: #d26e3d;
+        }
+        
+        .button-blue {
+            background-color: #0396ff;
+        }
+        .button-blue:hover {
+            background-color: #23a6ff;
+        }
+        
+        .link-button {
+            display: inline-block;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .description {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Tags */
+        .activity-tag-purple {
+            background-color: #e8d9e8;
+            color: #6b2d5c;
+        }
+        
+        .activity-tag-green {
+            background-color: #d9e8dd;
+            color: #2d6b3e;
+        }
+        
+        .activity-tag-orange {
+            background-color: #e8e0d9;
+            color: #b25e2d;
+        }
+        
+        .activity-tag-blue {
+            background-color: #d9e2f1;
+            color: #0396ff;
+        }
+        
+        .activity-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(to right, #6b2d5c, #f8f6f2);
+            margin: 2rem 0;
+            border-radius: 3px;
+        }
+        
+        /* Team Name Section */
+        .team-name-section {
+            background-color: #e6f0ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2d5c8b;
+        }
+        
+        .team-name-section h2 {
+            color: #2d5c8b;
+            margin-top: 0;
+        }
+        
+        .team-input-container {
+            display: flex;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        #team-name-input {
+            flex-grow: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #c5d9f1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        #set-name-btn {
+            background-color: #2d5c8b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+        
+        #set-name-btn:hover {
+            background-color: #3d6c9b;
+        }
+        
+        .suggestion-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .name-suggestion {
+            background-color: #c5d9f1;
+            color: #2d5c8b;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .name-suggestion:hover {
+            background-color: #a3c2e8;
+        }
+        
+        .team-display {
+            background-color: #f0f7ff;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .team-display h3 {
+            margin: 0;
+            color: #2d5c8b;
+        }
+        
+        #team-name-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1a4980;
+            display: block;
+            margin-top: 0.5rem;
+        }
+        
+        /* Coming Soon Badge */
+        .coming-soon {
+            display: inline-block;
+            background-color: #b25e2d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* Feature List */
+        .feature-list {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .feature-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Error Message */
+        .error-message {
+            color: #e53935;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #6b2d5c;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        footer a {
+            color: #ffddff;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Media Queries for Responsiveness */
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 1rem;
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .link-card {
+                padding: 1rem;
+            }
+            
+            .team-input-container {
+                flex-direction: column;
+            }
+            
+            #set-name-btn {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .link-button {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Easter Bible Study Resources</h1>
+            <nav aria-label="Main Navigation">
+                <ul>
+                   
+                    <li><a href="#story-challenge">Story Challenge</a></li>
+                    <li><a href="#verse-hunt">Verse Hunt</a></li>
+                    <li><a href="#prophecy-generator">Prophecy Generator</a></li>
+                    <li><a href="#bible-buddy">Bible Buddy</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Team Name Section -->
+        <section id="team-section" class="team-name-section" aria-labelledby="team-section-heading">
+            <h2 id="team-section-heading">Team Name Selection</h2>
+            <p>Enter your team's Old Testament-themed name below or select one of our suggestions:</p>
+            
+            <div class="suggestion-tags" role="group" aria-label="Team name suggestions">
+                <button type="button" class="name-suggestion">The Burning Bushes</button>
+                <button type="button" class="name-suggestion">Red Sea Crossers</button>
+                <button type="button" class="name-suggestion">Lion's Den Survivors</button>
+                <button type="button" class="name-suggestion">Pillar of Fire</button>
+                <button type="button" class="name-suggestion">Manna Gatherers</button>
+                <button type="button" class="name-suggestion">Temple Builders</button>
+            </div>
+            
+            <form id="team-name-form">
+                <div class="team-input-container">
+                    <input type="text" id="team-name-input" placeholder="Enter your team name..." aria-label="Team name input" maxlength="30">
+                    <button type="submit" id="set-name-btn">Set Name</button>
+                </div>
+                <p class="error-message" id="name-error">Please enter a team name</p>
+            </form>
+            
+            <div class="team-display" id="team-display">
+                <h3>Your Team:</h3>
+                <span id="team-name-display"></span>
+            </div>
+        </section>
+        
+        <!-- Blue Card for Guess the Story Challenge -->
+        <article id="story-challenge" class="link-card card-blue" aria-labelledby="story-challenge-heading">
+            <h2 id="story-challenge-heading">Easter in the Old Testament: Guess the Story Challenge</h2>
+            <div class="activity-tag activity-tag-blue">Team Challenge</div>
+            <div class="activity-tag activity-tag-blue">Bible Stories</div>
+            <div class="activity-tag activity-tag-blue">Easter Connections</div>
+            <div class="description">
+                <p>This interactive challenge invites teams to identify Old Testament stories that foreshadow Easter themes and Jesus' resurrection.</p>
+                <p>Teams read descriptions of 15 Bible stories, try to identify each story, and explain how it connects to Easter. The activity includes helpful hints and reveals connections between Old Testament narratives and Easter's significance.</p>
+            </div>
+            <a href="easter guess the story challange.html" class="link-button button-blue" aria-label="Open Story Challenge Activity">Open Story Challenge</a>
+        </article>
+        
+        <div class="section-divider" role="separator"></div>
+        
+        <!-- Purple Card -->
+        <article id="verse-hunt" class="link-card card-purple" aria-labelledby="verse-hunt-heading">
+            <h2 id="verse-hunt-heading">Easter Bible Verse Hunt</h2>
+            <div class="activity-tag activity-tag-purple">Team Challenge</div>
+            <div class="activity-tag activity-tag-purple">Old Testament Prophecies</div>
+            <div class="activity-tag activity-tag-purple">Sosian youth week bible study</div>
+            <div class="description">
+                <p>This interactive webpage features a team challenge to find Old Testament prophecies relating to Easter. The activity includes 8 clues with hints to help groups discover important biblical connections.</p>
+                <p>Players work together to solve each clue, find the Old Testament verse in their Bible or Bible app and say the verse reference to their Youth Leader.</p>
+            </div>
+            <a href="Easter Bible Verse Hunt.html" class="link-button button-purple" aria-label="Open Bible Verse Hunt Activity">Open Bible Verse Hunt</a>
+        </article>
+        
+        <div class="section-divider" role="separator"></div>
+        
+        <!-- Green Card -->
+        <article id="prophecy-generator" class="link-card card-green" aria-labelledby="prophecy-generator-heading">
+            <h2 id="prophecy-generator-heading">Easter Prophecy Generator</h2>
+            <div class="activity-tag activity-tag-green">Acting Challenge</div>
+            <div class="activity-tag activity-tag-green">Creative Performance</div>
+            <div class="activity-tag activity-tag-green">Team Activity</div>
+            <div class="description">
+                <p>This interactive tool randomly generates Old Testament prophecies related to Easter for teams to act out.</p>
+                <p>Teams select their team name, receive a random prophecy verse, and get a 2-minute prep timer to plan their skit demonstrating how the verse connects to Easter.</p>
+            </div>
+            <a href="Easter Prophesy generator.html" class="link-button button-green" aria-label="Open Prophecy Generator Activity">Open Prophecy Generator</a>
+        </article>
+        
+        <!-- Bible Buddy App Card (Using Orange Card Style) -->
+        <article id="bible-buddy" class="link-card card-orange" aria-labelledby="bible-buddy-heading">
+            <h2 id="bible-buddy-heading">Bible Buddy App <span class="coming-soon">COMING SOON</span></h2>
+            <div class="activity-tag activity-tag-orange">Mobile App</div>
+            <div class="activity-tag activity-tag-orange">Bible Study</div>
+            <div class="activity-tag activity-tag-orange">Community</div>
+            <div class="description">
+                <p>Our friendly Bible Buddy App is coming soon! This easy-to-use app will help you explore the Bible in fun and meaningful ways.</p>
+                <p>You'll enjoy these features:</p>
+                <ul class="feature-list">
+                    <li><strong>Bible Reader:</strong> Find and read passages easily, highlight verses, and read even without internet</li>
+                    <li><strong>Study Groups:</strong> Join online Bible groups, chat with friends, and plan study times together</li>
+                    <li><strong>Personal Journal:</strong> Write your thoughts and prayers, add Bible verses, and never lose your entries</li>
+                    <li><strong>Bible Games:</strong> Test your Bible knowledge with fun quizzes and see how you rank with others</li>
+                    <li><strong>Daily Verse:</strong> Start each day with an inspiring Bible verse</li>
+                    <li><strong>Reading Tracker:</strong> See how consistently you're spending time in God's Word</li>
+                </ul>
+                <p>Choose between light or dark screen colors, set reminders for daily reading, and save or share your journal entries.</p>
+            </div>
+            <a href="biblbuddyapp.html" class="link-button button-orange">Sign Up for Updates</a>
+        </div>
+        </article>
+        
+        <p style="text-align: center; margin-top: 2rem; color: #6b2d5c; font-weight: bold;">These resources help bring Old Testament Easter prophecies to life!</p>
+        
+        <footer>
+            <p>&copy; 2025 Easter Bible Resources</p>
+            <p>Contact: <a href="mailto:biblebuddyapp1@gmail.com">biblebuddyapp1@gmail.com</a></p>
+           
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const teamNameForm = document.getElementById('team-name-form');
+            const teamNameInput = document.getElementById('team-name-input');
+            const setNameBtn = document.getElementById('set-name-btn');
+            const teamDisplay = document.getElementById('team-display');
+            const teamNameDisplay = document.getElementById('team-name-display');
+            const nameSuggestions = document.querySelectorAll('.name-suggestion');
+            const nameError = document.getElementById('name-error');
+            
+            // Check for saved team name in local storage
+            const savedTeamName = localStorage.getItem('teamName');
+            if (savedTeamName) {
+                teamNameDisplay.textContent = savedTeamName;
+                teamDisplay.style.display = 'block';
+            }
+            
+            // Form submission handler
+            teamNameForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const teamName = teamNameInput.value.trim();
+                
+                // Validate input
+                if (!teamName) {
+                    nameError.style.display = 'block';
+                    teamNameInput.setAttribute('aria-invalid', 'true');
+                    return;
+                }
+                
+                // Hide error if present
+                nameError.style.display = 'none';
+                teamNameInput.setAttribute('aria-invalid', 'false');
+                
+                // Set and save team name
+                teamNameDisplay.textContent = teamName;
+                teamDisplay.style.display = 'block';
+                localStorage.setItem('teamName', teamName);
+                
+                // Clear input field
+                teamNameInput.value = '';
+                
+                // Announce to screen readers
+                const announcement = document.createElement('div');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.textContent = `Team name set to ${teamName}`;
+                document.body.appendChild(announcement);
+                setTimeout(() => document.body.removeChild(announcement), 1000);
+            });
+            
+            // Set team name when a suggestion is clicked
+            nameSuggestions.forEach(function(suggestion) {
+                suggestion.addEventListener('click', function() {
+                    teamNameInput.value = this.textContent;
+                    nameError.style.display = 'none';
+                    teamNameInput.setAttribute('aria-invalid', 'false');
+                    setNameBtn.click();
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
